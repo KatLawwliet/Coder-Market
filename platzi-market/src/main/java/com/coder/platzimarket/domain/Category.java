@@ -11,15 +11,11 @@ public class Category {
     public int getCategoryId() {
         return categoryId;
     }
-
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
+    public String getCategory() {return category;}
     public void setCategory(String category) {
         this.category = category;
     }
@@ -27,7 +23,6 @@ public class Category {
     public Boolean getActive() {
         return active;
     }
-
     public void setActive(Boolean active) {
         this.active = active;
     }
