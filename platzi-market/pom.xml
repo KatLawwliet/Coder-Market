@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.coder</groupId>
 	<artifactId>platzi-market</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0 -SNAPSHOT</version>
 	<name>coder-market</name>
 	<description>Proyecto para crear una API con Spring</description>
 
@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-			<version>2.6.8</version>
+			<version>2.7.3</version>
 		</dependency>
 
 		<dependency>
@@ -72,7 +72,14 @@
 			<version>0.9.1</version>
 		</dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
 
 	<build>
 		<plugins>

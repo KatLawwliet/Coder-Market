@@ -4,6 +4,7 @@ import com.coder.platzimarket.domain.dto.AuthenticationRequest;
 import com.coder.platzimarket.domain.dto.AuthenticationResponse;
 import com.coder.platzimarket.domain.service.CoderUserDatailsService;
 import com.coder.platzimarket.web.security.JWTUtil;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,18 +24,16 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private CoderUserDatailsService userDatailsService;
+    private CoderUserDatailsService coderUserDetailsService;
 
     @Autowired
     private JWTUtil jwtUtil;
 
-
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> createToken(AuthenticationRequest request) {
-
+    public ResponseEntity<AuthenticationResponse> createToken(@RequestBody AuthenticationRequest request) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-            UserDetails userDetails = CoderUserDatailsService.loadUserByUsername(request.getUsername());
+            UserDetails userDetails = coderUserDetailsService.loadUserByUsername(request.getUsername());
             String jwt = jwtUtil.generateToken(userDetails);
 
             return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.OK);
@@ -41,7 +41,6 @@ public class AuthController {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
-
 
 
 
